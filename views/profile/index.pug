@@ -9,9 +9,9 @@ block content
 				li(class="tab")
 					a(href="#Profile" class="grey-text text-lighten-4") Профіль
 				li(class="tab")
-					a(href="#ChangePassword" class="grey-text text-lighten-4") Змінити пароль
-				li(class="tab")
-					a(href="#UploadFoto" class="active grey-text text-lighten-4") Завантажити фото
+					a(href="#ChangePassword" class="active grey-text text-lighten-4") Змінити пароль
+				li(class="tab disabled")
+					a(href="#UploadFoto" class="grey-text text-lighten-4") Завантажити фото
 		div(class="card-content grey lighten-4")
 			div(id="Profile" class="col s12")
 				ul
@@ -33,17 +33,17 @@ block content
 							div(class="right")
 								button(class="btn waves-effect waves-light" type="submit" name="action" onClick="changePassword(event)") Змінити пароль
 			div(id="UploadFoto" class="col s12")
-				form(method="POST" name="form_foto" enctype="multipart/form-data" action="/profile")
+				form(method="POST" name="form_foto" enctype="multipart/form-data" action="/profile/upload_foto")
 					div(class="row")
 						div(class="input-field col m6 s12")
-							input(type="file" name="avatar")
-							input(class="file-path validate" type="text" name="files")
-							//- div(class="file-field input-field")
+							//- input(type="file" name="avatar")
+							//- input(class="file-path validate" type="text" name="files")
+							div(class="file-field input-field")
 								div(class="btn waves-effect waves-light lime darken-4")
 									span File
 									input(type="file" name="foto" id="InputFoto")
 								div(class="file-path-wrapper")
-									input(class="file-path validate" type="text" name="www")
+									input(class="file-path validate" type="text")
 					div(class="row")
 						div(class="input-field col m6 s12")
 							div(class="right")
