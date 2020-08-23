@@ -1,0 +1,81 @@
+extends ./../layout
+
+block content
+	h2(class="hide-on-small-only")= title
+	h3(class="center hide-on-med-and-up")= title		
+	if protective_arsenal.length
+		div(class="row")
+			//- div(class="input-field col s12 m7 l4 right")
+				mixin stantion_list(id, name)
+					option(value=id) #{name}
+				select(id="SelectStantion" name="stantion_id" class="validate browser-default" onChange="pdf(event)")
+					option(value="" disabled selected) Выберите подстанцию для печати
+					for stantion in stantions
+						option(value=stantion.id) #{stantion.name}
+			//- div(class="input-field col s12 m5 l4 right")
+				input(name="name" id="InputSearch" type="text" placeholder="Поиск..." autocomplete="off" disabled)
+		table(class="striped highlight responsive" id="DataTable")
+			//- thead
+				tr
+					th #
+					//- th filial_name
+					th Підстанція
+					th Назва
+					th Тип
+					th Інв. №
+					th Зав. №
+					th SAP R3 №
+					th Місце зберігання
+					th Одиниця виміру
+					th Кількість
+					th Дата наст. в/в
+					th Дата наст. огляду
+					if session.userData.right_update
+						th.center-align 
+							i(class="material-icons") edit
+					if session.userData.right_delete
+						th.center-align 
+							i(class="material-icons") delete
+					th 
+						i(class="material-icons") picture_as_pdf
+			//- each item, index in protective_arsenal
+				tr
+					td #{item.id}
+					//- td #{item.filial_name}
+					td #{item.stantion_name}
+					td #{item.name}
+					td #{item.type}
+					td #{item.inventory_number}
+					td #{item.factory_number}
+					td #{item.sap_number}
+					td #{item.place}
+					td #{item.unit}
+					td #{item.quantity}
+					td #{item.date_of_testing}
+					td #{item.date_of_inspection}
+					if session.userData.right_update
+						td(class="center-align") 
+							a(href="/protective_arsenal/update/" + item.id)
+								i(class="material-icons green-text text-darken-4") edit
+					if session.userData.right_delete
+						td(class="center-align") 
+							i(class="material-icons red-text text-darken-4" data-id=+item.id onClick="deleteRow(event)") delete
+					td(class="center-align") 
+						i(class="material-icons deep-orange-text text-darken-4" data-id=+item.stantion_id onClick="pdf(event)") picture_as_pdf
+	div(class="fixed-action-btn")
+		a(class="btn-floating btn-large waves-effect waves-light red")
+			i(class='material-icons') mode_edit
+		ul
+			if session.userData.right_create
+				li
+					a(class="btn-floating green waves-effect waves-light tooltipped" href="/protective_arsenal/create" data-position="left" data-tooltip="Добавить одно защитное средство")
+						i(class="material-icons") add_box
+			//- if session.userData.right_create
+				li
+					a(class="btn-floating yellow waves-effect waves-light darken-1 tooltipped" href="/protective_arsenal/create_several" data-position="left" data-tooltip="Добавить несколько защитных средств")
+						i(class="material-icons") add_to_photos
+	
+	//- link(rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css")
+	//- script(src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous")
+	//- script(type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js")
+	//- script(src="/javascripts/datatables.js")

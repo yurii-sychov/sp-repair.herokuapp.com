@@ -1,0 +1,75 @@
+extends ./../layout
+
+block content
+	div(class="container-fluid")
+		h2(class="center hide-on-small-only")= title
+		h3(class="center hide-on-med-and-up")= title
+		div(class="row")
+			div(class="col s12 m12")
+				div(class="card-panel")
+					div(class="input-field col s12")
+						div(class="right")
+							button(class="btn waves-effect waves-light red mr10 mb10 sm12" type="button" onClick="deleteRow(event)" disabled) Удалить строку
+							button(class="btn waves-effect waves-light green mr10 mb10 sm12" type="button" onClick="addRow(event)") Добавить строку
+					form(method="POST" name="form")
+						table(class="striped highlight")
+							thead
+								tr
+									th Подстанция
+									th Единица измерения
+									th Наименование
+									th Тип
+									th Инв. номер
+									th Зав. номер
+									th Место хранения
+									th Колличество
+							tbody
+								tr
+									td
+										select(id="SelectStantion" name="stantion_id[]" class="validate")
+											option(value="" disabled selected) Подстанция
+											for stantion in stantions
+												- selected = protective_arsenal && protective_arsenal[0].stantion_id == stantion.id ? "selected" : null;
+												option(value=stantion.id selected=selected) #{stantion.name}
+									td
+										select(id="SelectUnit" name="unit[]" class="validate")
+											option(value="" disabled selected) Единица измерения
+											- selected = protective_arsenal && protective_arsenal[0].unit == "шт." ? "selected" : null;
+											option(value="шт." selected=selected) Шт.
+											- selected = protective_arsenal && protective_arsenal[0].unit == "пара" ? "selected" : null;
+											option(value="пара" selected=selected) Пара
+											- selected = protective_arsenal && protective_arsenal[0].unit == "комплект" ? "selected" : null;
+											option(value="комплект" selected=selected) Комплект
+									td
+										- value = protective_arsenal && protective_arsenal[0].name ? protective_arsenal[0].name : null;
+										input(name="name[]" id="InputName" class="validate" type="text" placeholder="Enter Name" autocomplete="off" value=value)
+									td
+										- value = protective_arsenal && protective_arsenal[0].type ? protective_arsenal[0].type : null;
+										input(name="type[]" id="InputType" class="validate" type="text" placeholder="Enter Type" autocomplete="off" value=value)
+									td
+										- value = protective_arsenal && protective_arsenal[0].place ? protective_arsenal[0].place : null;
+										input(name="place[]" id="InputPlace" class="validate" type="text" placeholder="Enter Place" autocomplete="off" value=value)
+									td
+										- value = protective_arsenal && protective_arsenal[0].inventory_number ? protective_arsenal[0].inventory_number : null;
+										input(name="inventory_number[]" id="InputInventoryNumber" class="validate" type="text" placeholder="Enter InventoryNumber" autocomplete="off" value=value)
+									td
+										- value = protective_arsenal && protective_arsenal[0].factory_number ? protective_arsenal[0].factory_number : null;
+										input(name="factory_number[]" id="InputFactoryNumber" class="validate" type="text" placeholder="Enter InventoryNumber" autocomplete="off" value=value)
+									td
+										- value = protective_arsenal && protective_arsenal[0].quantity ? protective_arsenal[0].quantity : 1;
+										input(name="quantity[]" id="InputQuantity" class="validate" type="number" min="1" max="5" placeholder="Enter Quantity" autocomplete="off" value=value)
+						div(class="row")
+							div(class="input-field col s12 m6")
+								div(class="left")
+									a(class="btn waves-effect waves-light blue" href="/protective_arsenal") Назад
+							if session.userData.right_create
+								div(class="input-field col s12 m6")
+									div(class="right")
+										- handler = protective_arsenal ? "updateRows(event)": "createRows(event)";
+										button(class="btn waves-effect waves-light" type="submit" name="action" onClick=handler) Создать
+
+		
+
+
+
+

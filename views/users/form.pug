@@ -1,0 +1,53 @@
+extends ./../layout
+
+block content
+	h1= title
+	div(class='row')
+		div(class='col s12 m12')
+			div(class='card-panel')
+				form(method="POST" name="form")
+					if item
+						- value = item && item[0].id ? item[0].id : null;
+						input(name="id" type="hidden" value=value)
+					div(class="row")
+						div(class="input-field col s12")
+							- value = item && item[0].surname ? item[0].surname : null;
+							input(name="surname" id='InputSurname' class='validate' type='text' placeholder='Enter Surname' autocomplete="off" value=value required="required")
+							label(for="InputSurname") Surname
+					div(class="row")
+						div(class="input-field col s12")
+							- value = item && item[0].name ? item[0].name : null;
+							input(name="name" id='InputName' class='validate' type='text' placeholder='Enter Name' autocomplete="off" value=value required="required")
+							label(for="InputName") Name
+					div(class="row")
+						div(class="input-field col s12")
+							- value = item && item[0].patronymic ? item[0].patronymic : null;
+							input(name="patronymic" id='InputPatronymic' class='validate' type='text' placeholder='Enter Patronymic' autocomplete="off" value=value required="required")
+							label(for='InputPatronymic') Patronymic
+					div(class="row")
+						div(class="col s12")
+							select(id="SelectStatus" name="status" class="validate")
+								option(value="" disabled selected) Выберите статус
+								- selected = item && item[0].status == '1' ? 'selected' : null;
+								option(value="1" selected=selected) Активен
+								- selected = item && item[0].status == '0' ? 'selected' : null;
+								option(value="0" selected=selected) Не активен
+							label(for="SelectStatus") Status
+					div(class="row")
+						div(class="col s12")
+							select(id="SelectStantion" name="stantion_id[]" class="validate browser-defaul" multiple)
+								option(value="" disabled selected) Выберите подстанцию или подстанции
+								for stantion in stantions
+									- selected = (user_stantion && user_stantion.includes(stantion.id)) ? 'selected' : null;
+									option(value=stantion.id selected=selected) #{stantion.name}
+							label(for="SelectStantion") Stantion
+					div(class="row")
+						div(class="input-field col s12")
+							- handler = item ? 'updateRow(event)': 'createRow(event)';
+							button(class="btn waves-effect waves-light" type="submit" name="action" onClick=handler) Submit
+
+		
+
+
+
+

@@ -1,0 +1,47 @@
+extends ./../layout
+
+block content
+	h1(class="hide-on-small-only")= title
+	h3(class="center hide-on-med-and-up")= title
+	if users.length
+		div(class="row")
+			div(class="input-field col s12 m5 l4 right")
+				input(name="name" id="InputSearch" type="text" placeholder="Поиск..." autocomplete="off")
+		table(class="striped highlight responsive-table")
+			thead
+				tr
+					th #
+					//- th filial_name
+					th Фамилия
+					th Имя
+					th Отчество
+					th Почта
+					th Статус
+					th Группа
+					if session.userData.group === 'root_admin'
+						th.center-align 
+							i(class="material-icons") edit
+					if session.userData.group === 'root_admin'
+						th.center-align 
+							i(class="material-icons") delete
+			each item, index in users
+				tr
+					td #{item.id}
+					//- td #{item.filial_name}
+					td #{item.surname}
+					td #{item.name}
+					td #{item.patronymic}
+					td #{item.email}
+					td #{item.status}
+					td #{item.group}
+					if session.userData.group === 'root_admin'
+						th(class="center-align") 
+							a(href="/users/update/" + item.id)
+								i(class="material-icons green-text text-darken-4 delete-icon") edit
+					if session.userData.group === 'root_admin'
+						th(class="center-align") 
+							i(class="material-icons red-text text-darken-4 delete-icon" data-id=+item.id onClick="deleteRow(event)") delete
+	div(class="fixed-action-btn")
+		if session.userData.group === 'root_admin'
+			a(class="btn-floating btn-large waves-effect waves-light teal" href="/users/create")
+				i(class='material-icons') add

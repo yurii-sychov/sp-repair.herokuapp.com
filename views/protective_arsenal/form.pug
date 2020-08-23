@@ -1,0 +1,99 @@
+extends ./../layout
+
+block content
+	div(class="container")
+		h2(class="center hide-on-small-only")= title
+		h3(class="center hide-on-med-and-up")= title
+		div(class="row")
+			div(class="col s12 m12")
+				div(class="card-panel")
+					if !session.userData.right_create
+						blockquote У Вас нет прав для формирования данной страницы.
+					else
+						form(method="POST" name="form")
+							if protective_arsenal
+								- value = protective_arsenal && protective_arsenal[0].id ? protective_arsenal[0].id : null;
+								input(name="id" type="hidden" value=value)
+								- value = protective_arsenal && protective_arsenal[0].number_of_updates ? protective_arsenal[0].number_of_updates : null;
+								input(name="number_of_updates" type="hidden" value=value)
+							div(class="row")
+								div(class="col s12 m6")
+									select(id="SelectStantion" name="stantion_id" class="validate")
+										option(value="" disabled selected) Підстанція
+										for stantion in stantions
+											- selected = protective_arsenal && protective_arsenal[0].stantion_id == stantion.id ? "selected" : null;
+											option(value=stantion.id selected=selected) #{stantion.name}
+									label(for="SelectStantion") Підстанція
+								div(class="col s12 m6")
+									select(id="SelectUnit" name="unit" class="validate")
+										option(value="" disabled selected) Одиниця виміру
+										- selected = protective_arsenal && protective_arsenal[0].unit == "шт." ? "selected" : null;
+										option(value="шт." selected=selected) Штука
+										- selected = protective_arsenal && protective_arsenal[0].unit == "пара" ? "selected" : null;
+										option(value="пара" selected=selected) Пара
+										- selected = protective_arsenal && protective_arsenal[0].unit == "комплект" ? "selected" : null;
+										option(value="комплект" selected=selected) Комплект
+										- selected = protective_arsenal && protective_arsenal[0].unit == "метр" ? "selected" : null;
+										option(value="метр" selected=selected) Метр
+									label(for="SelectUnit") Одиниця виміру	
+							div(class="row")
+								div(class="input-field col s12 m4")
+									- value = protective_arsenal && protective_arsenal[0].name ? protective_arsenal[0].name : null;
+									input(name="name" id="InputName" class="validate" type="text" placeholder="Enter Name" autocomplete="off" value=value required="required")
+									label(for="InputName") Найменування
+								div(class="input-field col s12 m4")
+									- value = protective_arsenal && protective_arsenal[0].type ? protective_arsenal[0].type : null;
+									input(name="type" id="InputType" class="validate" type="text" placeholder="Enter Type" autocomplete="off" value=value required="required")
+									label(for="InputType") Тип
+								div(class="input-field col s12 m4")
+									- value = protective_arsenal && protective_arsenal[0].place ? protective_arsenal[0].place : null;
+									input(name="place" id="InputPlace" class="validate" type="text" placeholder="Enter Place" autocomplete="off" value=value required="required")
+									label(for="InputPlace") Місце зберігання
+							div(class="row")
+								div(class="input-field col s12 m3")
+									- value = protective_arsenal && protective_arsenal[0].inventory_number ? protective_arsenal[0].inventory_number : null;
+									input(name="inventory_number" id="InputInventoryNumber" class="validate" type="text" placeholder="Enter InventoryNumber" autocomplete="off" value=value)
+									label(for="InputInventoryNumber") Інвентарний номер
+								div(class="input-field col s12 m3")
+									- value = protective_arsenal && protective_arsenal[0].factory_number ? protective_arsenal[0].factory_number : null;
+									input(name="factory_number" id="InputFactoryNumber" class="validate" type="text" placeholder="Enter InventoryNumber" autocomplete="off" value=value)
+									label(for="InputFactoryNumber") Заводський номер
+								div(class="input-field col s12 m3")
+									- value = protective_arsenal && protective_arsenal[0].sap_number ? protective_arsenal[0].sap_number : null;
+									input(name="sap_number" id="InputSapNumber" class="validate" type="text" placeholder="Enter SapNumber" autocomplete="off" value=value)
+									label(for="InputFactoryNumber") Sap R3 номер					
+								div(class="input-field col s12 m3")
+									- value = protective_arsenal && protective_arsenal[0].quantity ? protective_arsenal[0].quantity : 1;
+									input(name="quantity" id="InputQuantity" class="validate" type="number" min="1" max="5" placeholder="Enter Quantity" autocomplete="off" value=value required="required")
+									label(for="InputQuantity") Кількість
+							div(class="row")
+								div(class="input-field col s12 m6")
+									- value = protective_arsenal && protective_arsenal[0].date_of_testing ? protective_arsenal[0].date_of_testing : null;
+									input(name="date_of_testing" id="InputDateOfTesting" class="validate datepicker" type="text" placeholder="Виберіть дату випробувань" autocomplete="off" value=value)
+									label(for="InputDateOfTesting") Дата останніх випробувань
+								div(class="input-field col s12 m6")
+									- value = protective_arsenal && protective_arsenal[0].period_of_testing ? protective_arsenal[0].period_of_testing : null;
+									input(name="period_of_testing" id="InputPeriodOfTesting" class="validate" type="number" min="1" max="48" placeholder="Введіть періодичність випробувань, місяць" autocomplete="off" value=value)
+									label(for="InputPeriodOfTesting") Периодичність випробувань, місяць
+								div(class="input-field col s12 m6")
+									- value = protective_arsenal && protective_arsenal[0].date_of_inspection ? protective_arsenal[0].date_of_inspection : null;
+									input(name="date_of_inspection" id="InputDateOfInspection" class="validate datepicker" type="text" placeholder="Выберіть дату огляду" autocomplete="off" value=value)
+									label(for="InputDateOfInspection") Дата останнього огляду
+								div(class="input-field col s12 m6")
+									- value = protective_arsenal && protective_arsenal[0].period_of_inspection ? protective_arsenal[0].period_of_inspection : null;
+									input(name="period_of_inspection" id="InputPeriodOfInspection" class="validate" type="number" min="1" max="48" placeholder="Введіть періодичність огляду, місяць" autocomplete="off" value=value)
+									label(for="InputPeriodOfInspection") Періодичність огляду, місяць
+							div(class="row")
+								div(class="input-field col s6")
+									div(class="left")
+										a(class="btn waves-effect waves-light blue" href="/protective_arsenal") Назад
+								div(class="input-field col s6")
+									div(class="right")
+										- handler = protective_arsenal ? "updateRow(event)": "createRow(event)";
+										button(class="btn waves-effect waves-light" type="submit" name="action" onClick=handler) Створити
+
+			
+
+
+
+

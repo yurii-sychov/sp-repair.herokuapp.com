@@ -1,0 +1,24 @@
+doctype html
+html
+	head
+		meta(charset="UTF-8")
+		title= title
+		link(rel="stylesheet" href="css/auth.css")
+		link(rel="icon" href="/images/favicon.png" sizes="32x32")
+		script(src="/javascripts/auth.js")
+	body
+		form(name="form")
+			input(checked="" id="signin" name="action" type="radio" value="signin")
+			label(for="signin") Sign in
+			//- input(id="signup" name="action" type="radio" value="signup")
+			//- label(for="signup") Sign up
+			//- input(id="reset" name="action" type="radio" value="reset")
+			//- label(for="reset") Reset
+			div(id="wrapper")
+				div(id="arrow")
+				input(id="email" placeholder="Email" type="text" name="email")
+				input(id="pass" placeholder="Password" type="password" name="password")
+				input(id="repass" placeholder="Repeat password" type="password" name="repassword")
+			button(type="submit" id="submit" onClick="auth(event)")
+				span Reset password<br/>Sign in<br/>Sign up
+		div(id="hint") Click on the tabs

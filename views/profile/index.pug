@@ -1,0 +1,52 @@
+extends ./../layout
+
+block content
+	h2(class="hide-on-small-only")= title
+	h3(class="center hide-on-med-and-up")= title
+	div(class="card blue")
+		div(class="card-tabs")
+			ul(class="tabs tabs-fixed-width tabs-transparent z-depth-1" id="TabProfile")
+				li(class="tab")
+					a(href="#Profile" class="grey-text text-lighten-4") Профіль
+				li(class="tab")
+					a(href="#ChangePassword" class="grey-text text-lighten-4") Змінити пароль
+				li(class="tab")
+					a(href="#UploadFoto" class="active grey-text text-lighten-4") Завантажити фото
+		div(class="card-content grey lighten-4")
+			div(id="Profile" class="col s12")
+				ul
+					li #{user.surname}
+					li #{user.name}
+					li #{user.patronymic}
+			div(id="ChangePassword" class="col s12")
+				form(method="POST" name="form")
+					div(class="row")
+						div(class="input-field col m6 s12")
+							input(name="new_password" id="InputNewPassword" class="validate" type="password" placeholder="Введіть новий пароль" autocomplete="off")
+							label(for="InputNewPassword") Новий пароль
+					div(class="row")
+						div(class="input-field col m6 s12")
+							input(name="new_repassword" id="InputNewRePassword" class="validate" type="password" placeholder="Повторіть новий пароль" autocomplete="off")
+							label(for="InputNewRePassword") Повтор нового паролю
+					div(class="row")
+						div(class="input-field col m6 s12")
+							div(class="right")
+								button(class="btn waves-effect waves-light" type="submit" name="action" onClick="changePassword(event)") Змінити пароль
+			div(id="UploadFoto" class="col s12")
+				form(method="POST" name="form_foto" enctype="multipart/form-data" action="/profile")
+					div(class="row")
+						div(class="input-field col m6 s12")
+							input(type="file" name="avatar")
+							input(class="file-path validate" type="text" name="files")
+							//- div(class="file-field input-field")
+								div(class="btn waves-effect waves-light lime darken-4")
+									span File
+									input(type="file" name="foto" id="InputFoto")
+								div(class="file-path-wrapper")
+									input(class="file-path validate" type="text" name="www")
+					div(class="row")
+						div(class="input-field col m6 s12")
+							div(class="right")
+								button(class="btn waves-effect waves-light purple darken-4" type="submit" name="action" onClick="uploadFoto(event)") Завантажити фото
+
+
