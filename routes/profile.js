@@ -1,19 +1,6 @@
 const express = require('express');
 
 const router = express.Router();
-const multer = require('multer');
-var storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, 'public/uploads/')
-	},
-	filename: function (req, file, cb) {
-		cb(null, Date.now() + file.originalname)
-	}
-})
-
-var upload = multer({ storage: storage })
-// const upload = multer({ dest: 'public/uploads/'});
-// const upload = multer({ storage: multer.memoryStorage() });
 
 const mysql = require('mysql2');
 const configMysql = require('./../config/database');
@@ -79,9 +66,9 @@ router.put('/change_password', function (req, res, next) {
 	});
 });
 
-router.post('/upload_foto', upload.single('avatar'), function (req, res) {
-	console.log(req.file);
-	res.status(200).json({ file: req.file });
+router.post('/upload_foto', function (req, res) {
+	console.log(req.files);
+	res.status(200).json({ files: req.files });
 });
 
 module.exports = router;

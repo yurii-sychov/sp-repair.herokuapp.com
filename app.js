@@ -11,15 +11,7 @@ const usersRouter = require('./routes/users');
 const protectiveArsenalRouter = require('./routes/protective_arsenal');
 const profileRouter = require('./routes/profile');
 
-// var multer  = require('multer')
-// var upload = multer({ dest: 'uploads/' })
-
 const app = express();
-
-// app.post('/profile', upload.single('avatar'), (req, res, next) => {
-// 	res.send('/profile/upload_foto');
-// 	// res.status(200).json({message: 'success', 'req.file': req.file, 'req.body': req.body});
-// })
 
 const formData = require('express-form-data');
 app.use(formData.parse())
