@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		e.preventDefault();
 		let id = e.target.dataset.id;
 		let table = e.target.closest('table');
-		let tr = e.target.parentElement.parentElement;
+		let tr = e.target.parentElement.parentElement.parentElement;
 		let tr_length = e.target.closest('table').rows.length;
 		if (confirm('Вы дествительно хотите удалить запись с id=' + id) === true) {
 			fetch('/' + location.pathname.split('/')[1] + '/delete', {
@@ -159,27 +159,27 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 	}
 
-	// uploadFoto = (e) => {
-	// 	e.preventDefault();
-	// 	let form = document.forms.form_foto;
-	// 	let formData = new FormData(form);
-	// 	fetch('/profile/upload_foto', {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			// 'Content-type': 'application/json; charset=UTF-8'
-	// 		},
-	// 		body: formData
-	// 	})
-	// 		.then(response => response.json())
-	// 		.then(json => {
-	// 			if (json.status === 'ERROR') {
-	// 				M.toast({ html: json.message, classes: 'rounded' });
-	// 			}
-	// 			else {
-	// 				M.toast({ html: json.message, classes: 'rounded' });
-	// 			}
-	// 		});
-	// }
+	uploadFoto = (e) => {
+		e.preventDefault();
+		let form = document.forms.form_foto;
+		let formData = new FormData(form);
+		fetch('/profile', {
+			method: 'POST',
+			headers: {
+				// 'Content-type': 'application/json; charset=UTF-8'
+			},
+			body: formData
+		})
+			// .then(response => response.json())
+			.then(json => {
+				if (json.status === 'ERROR') {
+					// M.toast({ html: json.message, classes: 'rounded' });
+				}
+				else {
+					// M.toast({ html: json.message, classes: 'rounded' });
+				}
+			});
+	}
 
 	async function request(url, method = 'GET', data = null) {
 		try {

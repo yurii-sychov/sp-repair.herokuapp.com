@@ -11,12 +11,34 @@ const usersRouter = require('./routes/users');
 const protectiveArsenalRouter = require('./routes/protective_arsenal');
 const profileRouter = require('./routes/profile');
 
+const fileUpload = require('express-fileupload');
+const upload = fileUpload({
+	useTempFiles: true,
+	tempFileDir: './public/uploads/'
+});
+
 const app = express();
 
-const formData = require('express-form-data');
-app.use(formData.parse())
+app.post('/profile', upload, function (req, res) {
+	console.log('req.files', req.files);
+	return res.json(req.files);
+	// res.redirect('/profile');
+});
 
-app.use(session({ secret: 'SP-repair', saveUninitialized: true, resave: false, cookie: { maxAge: 60000*60 } } ));
+
+
+
+
+const formData = require('express-form-data');
+// const options = {
+// 	uploadDir: '/upload',
+// 	// autoClean: true
+// };
+app.use(formData.parse());
+
+
+
+app.use(session({ secret: 'SP-repair', saveUninitialized: true, resave: false, cookie: { maxAge: 60000 * 60 } }));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

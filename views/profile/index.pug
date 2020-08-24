@@ -7,9 +7,9 @@ block content
 		div(class="card-tabs")
 			ul(class="tabs tabs-fixed-width tabs-transparent z-depth-1" id="TabProfile")
 				li(class="tab")
-					a(href="#Profile" class="grey-text text-lighten-4") Профіль
+					a(href="#Profile" class="active grey-text text-lighten-4") Профіль
 				li(class="tab")
-					a(href="#ChangePassword" class="active grey-text text-lighten-4") Змінити пароль
+					a(href="#ChangePassword" class="grey-text text-lighten-4") Змінити пароль
 				li(class="tab disabled")
 					a(href="#UploadFoto" class="grey-text text-lighten-4") Завантажити фото
 		div(class="card-content grey lighten-4")
@@ -33,7 +33,7 @@ block content
 							div(class="right")
 								button(class="btn waves-effect waves-light" type="submit" name="action" onClick="changePassword(event)") Змінити пароль
 			div(id="UploadFoto" class="col s12")
-				form(method="POST" name="form_foto" enctype="multipart/form-data" action="/profile/upload_foto")
+				form(method="POST" name="form_foto" enctype="multipart/form-data" action="/profile")
 					div(class="row")
 						div(class="input-field col m6 s12")
 							//- input(type="file" name="avatar")

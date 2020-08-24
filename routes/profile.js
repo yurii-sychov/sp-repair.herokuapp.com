@@ -24,8 +24,8 @@ router.get('/', function (req, res, next) {
 			return res.json(err);
 		}
 		let sql;
-		sql = `SELECT * FROM users WHERE  id = '${req.session.userData.id}'`;
-		// sql = `SELECT * FROM users WHERE  id = 1`;
+		// sql = `SELECT * FROM users WHERE  id = '${req.session.userData.id}'`;
+		sql = `SELECT * FROM users WHERE  id = 1`;
 
 		connection.query(sql, (err, results, fields) => {
 			connection.release();
@@ -67,7 +67,7 @@ router.put('/change_password', function (req, res, next) {
 });
 
 router.post('/upload_foto', function (req, res) {
-	console.log(req.files);
+	console.log(req.file);
 	res.status(200).json({ files: req.files });
 });
 

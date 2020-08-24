@@ -42,11 +42,12 @@ $(document).ready( function () {
     
 
     // Сортирорвка по умолчанию
-
-    if (table.order()[0][0] == 0) {
-        table.columns('.order-default').order('asc').draw();
-    }
-    console.log(table.order())
+    // console.log(table.state());
+    
+    // if (table.order()[0][0] === 0 || table.state() === null) {
+    //     table.columns('.order-default').order('asc').draw();
+    // }
+    // console.log(table.order())
         
     $('#DataTable_length select').addClass('browser-default');
 
