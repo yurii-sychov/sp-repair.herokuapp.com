@@ -14,10 +14,19 @@ block content
 					a(href="#UploadFoto" class="grey-text text-lighten-4") Завантажити фото
 		div(class="card-content grey lighten-4")
 			div(id="Profile" class="col s12")
-				ul
-					li #{user.surname}
-					li #{user.name}
-					li #{user.patronymic}
+				div(class="col s12 m7")
+					div(class="card horizontal")
+						div(class="card-image")
+							img(style="width: 500px" src="http://sychov.pp.ua/assets/admin/uploads/users/"+session.userData.image)
+						div( class="card-stacked")
+							div(class="card-content")
+								p
+									ul
+										li #{user.surname}
+										li #{user.name}
+										li #{user.patronymic}
+							div(class="card-action")
+								button(class="btn waves-effect waves-light" type="submit" name="action" onClick="uploadFoto(event)") Змінити дані
 			div(id="ChangePassword" class="col s12")
 				form(method="POST" name="form")
 					div(class="row")

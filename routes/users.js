@@ -166,7 +166,7 @@ router.put('/update', function (req, res, next) {
 			}
 			else {
 				if (req.body.stantion_id) {
-					let sql = `DELETE FROM user_stantion WHERE user_id = ${req.body.id}`;
+					let sql = `DELETE FROM users_stantions WHERE user_id = ${req.body.id}`;
 					connection.query(sql, (err, results, fields) => {
 						// connection.release();
 						if (err) {
@@ -174,7 +174,7 @@ router.put('/update', function (req, res, next) {
 						}
 					});
 					for (let i=0; i<req.body.stantion_id.length; i++) {
-						let sql = `INSERT INTO user_stantion (user_id, stantion_id) VALUES (${req.body.id}, ${req.body.stantion_id[i]})`;
+						let sql = `INSERT INTO users_stantions (user_id, stantion_id) VALUES (${req.body.id}, ${req.body.stantion_id[i]})`;
 						connection.query(sql, (err, results, fields) => {
 							connection.release();
 							if (err) {

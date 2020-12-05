@@ -429,7 +429,7 @@ router.put('/update', function (req, res, next) {
 
 	pool.getConnection(function(err, connection) {
 		if(err) {
-			// return res.json(err);
+			return res.json(err);
 		}
 		let sql = `UPDATE protective_arsenal SET stantion_id= '${req.body.stantion_id}', name = '${req.body.name}', type = '${req.body.type}', place = '${req.body.place}', unit = '${req.body.unit}', quantity = '${req.body.quantity}', inventory_number='${req.body.inventory_number}', factory_number='${req.body.factory_number}', sap_number = '${req.body.sap_number}', date_of_testing='${req.body.date_of_testing}', period_of_testing='${req.body.period_of_testing}', date_of_inspection='${req.body.date_of_inspection}', period_of_inspection='${req.body.period_of_inspection}', number_of_updates = ${Number(req.body.number_of_updates)+Number(1)}, updated_at = NOW(), updated_by = '${req.session.userData.id}' WHERE protective_arsenal.id = ${req.body.id}`;
 		connection.query(sql, 'post', (err, results, fields) => {

@@ -9,6 +9,7 @@ const homeRouter = require('./routes/home');
 const authRouter = require('./routes/auth');
 const usersRouter = require('./routes/users');
 const protectiveArsenalRouter = require('./routes/protective_arsenal');
+// const ownNeedsRouter = require('./routes/own_needs');
 const profileRouter = require('./routes/profile');
 
 const fileUpload = require('express-fileupload');
@@ -25,18 +26,12 @@ app.post('/profile', upload, function (req, res) {
 	// res.redirect('/profile');
 });
 
-
-
-
-
 const formData = require('express-form-data');
 // const options = {
 // 	uploadDir: '/upload',
 // 	// autoClean: true
 // };
 app.use(formData.parse());
-
-
 
 app.use(session({ secret: 'SP-repair', saveUninitialized: true, resave: false, cookie: { maxAge: 60000 * 60 } }));
 
@@ -55,6 +50,7 @@ app.use('/', homeRouter);
 app.use('/auth', authRouter);
 app.use('/users', usersRouter);
 app.use('/protective_arsenal', protectiveArsenalRouter);
+// app.use('/own_needs', ownNeedsRouter);
 app.use('/profile', profileRouter);
 
 // catch 404 and forward to error handler
