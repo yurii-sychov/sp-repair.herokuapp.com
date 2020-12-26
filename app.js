@@ -7,9 +7,10 @@ const logger = require('morgan');
 
 const homeRouter = require('./routes/home');
 const authRouter = require('./routes/auth');
+const extinguishersRouter = require('./routes/extinguishers');
 const usersRouter = require('./routes/users');
 const protectiveArsenalRouter = require('./routes/protective_arsenal');
-// const ownNeedsRouter = require('./routes/own_needs');
+const ownNeedsRouter = require('./routes/own_needs');
 const profileRouter = require('./routes/profile');
 
 const fileUpload = require('express-fileupload');
@@ -48,9 +49,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', homeRouter);
 app.use('/auth', authRouter);
+app.use('/extinguishers', extinguishersRouter);
 app.use('/users', usersRouter);
 app.use('/protective_arsenal', protectiveArsenalRouter);
-// app.use('/own_needs', ownNeedsRouter);
+app.use('/own_needs', ownNeedsRouter);
 app.use('/profile', profileRouter);
 
 // catch 404 and forward to error handler

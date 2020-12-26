@@ -39,6 +39,8 @@ html
 				li
 					a(href="/own_needs") Власні потреби
 				li
+					a(href="/extinguishers") Вогнегасники	
+				li
 					a(href="/profile") Профіль
 				li
 					a(href="/auth/logout")
@@ -58,6 +60,10 @@ html
 						- className = (page === 'own_needs') ? 'active' : 'noactive'
 						li(class=className) 
 							a(href="/own_needs") Власні потреби
+
+						- className = (page === 'extinguishers') ? 'active' : 'noactive'
+						li(class=className) 
+							a(href="/extinguishers") Вогнегасники
 
 						//- - className = (page === 'switching_forms') ? 'active' : 'noactive'
 						//- li(class=className) 
