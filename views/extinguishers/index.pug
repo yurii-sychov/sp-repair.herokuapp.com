@@ -1,4 +1,15 @@
 extends ./../layout
-	
+
 block content
-	div Страница в разработке
+	h2(class="hide-on-small-only")= title
+	h3(class="center hide-on-med-and-up")= title
+	div(class="row")
+		div(class="input-field col s12 m7 l4 right")
+			mixin stantion_list(id, name)
+				option(value=id) #{name}
+			select(id="SelectStantion" name="stantion_id" class="validate browser-default")
+				option(value="" disabled selected) Выберите подстанцию для печати
+				for stantion in stantions
+					option(value=stantion.id) #{stantion.name}
+		div(class="input-field col s12 m5 l4 right")
+			input(name="name" id="InputSearch" type="text" placeholder="Поиск..." autocomplete="off")

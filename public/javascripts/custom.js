@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	let elem = document.getElementById('TabProfile');
 	let instance = M.Tabs.init(elem, {});
 
+	let selectStantion = document.getElementById('SelectStantion');
+
 	createRow = (e) => {
 		e.preventDefault();
 		let form = document.forms.form;
